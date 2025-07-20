@@ -1,0 +1,13 @@
+altair>=5.5.0
+beautifulsoup4>=4.13.4
+httpx>=0.28.1
+kaleido>=1.0.0
+matplotlib>=3.10.3
+pandas>=2.3.1
+plotly>=6.2.0
+pytrends>=4.9.2
+reportlab>=4.4.2
+requests>=2.32.4
+streamlit>=1.46.1
+tqdm>=4.67.1
+wordcloud>=1.9.4
