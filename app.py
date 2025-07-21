@@ -17,7 +17,7 @@ st.set_page_config(page_title="Portal Berita", layout="wide")
 # Setelah login
 # -------------------------------
 st.sidebar.title("📚 Menu")
-menu = st.sidebar.radio("Pilih", ["Crawling", "Sentiment", "Dashboard", "Logout", ])
+menu = st.sidebar.radio("Pilih", ["Crawling", "Analysis Berita", "Dashboard", "Logout", ])
 
 if menu == "Logout":
     st.session_state.token = None
@@ -28,7 +28,7 @@ if menu == "Logout":
 # Daftar berita dengan filter & pagination
 # -------------------------------
 
-elif menu == "Sentiment":
+elif menu == "Analysis Berita":
     title_filter = st.text_input("🔍 Filter judul berita")
     skip = st.sidebar.number_input("⏭️ Skip", min_value=0, step=1)
     limit = st.sidebar.slider("🧮 Limit", 1, 20, 6)
@@ -300,6 +300,18 @@ elif menu == "Sentiment":
         st.warning("No news found with the selected filters. Please adjust your date range or source selection.")
 
 
+    # Store the initial value of widgets in session state
+    if "visibility" not in st.session_state:
+        st.session_state.visibility = "visible"
+        st.session_state.disabled = False
+
+    option = st.sidebar.selectbox(
+        "Source Berita :",
+        ("Verified", "Unverified"),
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+    )
+
 # -------------------------------
 # Crawling
 # -------------------------------
@@ -497,6 +509,19 @@ elif menu == "Crawling":
                 st.rerun()
             else:
                 break
+
+    
+    # Store the initial value of widgets in session state
+    if "visibility" not in st.session_state:
+        st.session_state.visibility = "visible"
+        st.session_state.disabled = False
+
+    option = st.sidebar.selectbox(
+        "Source Berita :",
+        ("Verified", "Unverified"),
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+    )
 
 # -------------------------------
 # chart
