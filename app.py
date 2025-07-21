@@ -33,6 +33,18 @@ elif menu == "Analysis Berita":
     skip = st.sidebar.number_input("⏭️ Skip", min_value=0, step=1)
     limit = st.sidebar.slider("🧮 Limit", 1, 20, 6)
 
+    # Store the initial value of widgets in session state
+    if "visibility" not in st.session_state:
+        st.session_state.visibility = "visible"
+        st.session_state.disabled = False
+
+    option = st.selectbox(
+        "Relevance :",
+        ("Relevant", "Irrelevant"),
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+    )
+    
     st.title("📋 Daftar Berita")
     # news_list = api.get_news(st.session_state.token, title_filter, skip, limit)
 
@@ -300,17 +312,6 @@ elif menu == "Analysis Berita":
         st.warning("No news found with the selected filters. Please adjust your date range or source selection.")
 
 
-    # Store the initial value of widgets in session state
-    if "visibility" not in st.session_state:
-        st.session_state.visibility = "visible"
-        st.session_state.disabled = False
-
-    option = st.sidebar.selectbox(
-        "Source Berita :",
-        ("Verified", "Unverified"),
-        label_visibility=st.session_state.visibility,
-        disabled=st.session_state.disabled,
-    )
 
 # -------------------------------
 # Crawling
